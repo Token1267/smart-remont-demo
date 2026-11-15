@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ремонт квартир под ключ в Алматы — «Smart Remont»</title>
+<meta name="description" content="Ремонт квартир под ключ с фиксированной сметой и сроком в договоре. Посмотрите, как меняется комната от бетона до готового интерьера, и рассчитайте стоимость.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F3F2EE">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ремонт квартир под ключ — «Smart Remont»">
+<meta property="og:description" content="От бетонной коробки до готовой квартиры. Смета и срок — в договоре.">
+<meta property="og:image" content="img/room-poster.webp">
+<link rel="preload" href="fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=1">
+<style>:root{--tape:#1E7A4C;--tape-dark:#175F3B}</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "name": "Smart Remont — ремонт квартир", "address": {"@type": "PostalAddress", "streetAddress": "Алматы", "addressLocality": "Алматы", "addressCountry": "KZ"}, "telephone": "+77750075959"}</script>
+<!-- Яндекс Метрика: вставить счётчик клиента. Цели: phone, whatsapp, telegram, form -->
+</head>
+<body>
+
+<p class="demo-note">Это пример сайта для компании «Smart Remont», а не её официальный сайт. Цены и тексты — образец. Сделал Толыбай Уахит.</p>
+
+<header class="top">
+  <a class="brand" href="#" aria-label="Smart Remont, на главную"><span class="brand-mark" aria-hidden="true"></span>Smart Remont</a>
+  <nav class="nav" aria-label="Разделы">
+    <a href="#calc">Стоимость</a>
+    <a href="#steps">Этапы</a>
+    <a href="#included">Что входит</a>
+    <a href="#contact">Контакты</a>
+  </nav>
+  <a class="top-phone" href="tel:+77750075959" data-goal="phone">+7 (775) 007-59-59</a>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero-copy">
+    <h1>Сдаём ремонт в день, который записан в договоре</h1>
+    <p class="lead">Ремонт квартир под ключ в Алматы. Смета не растёт после подписания, срок сдачи записан в договоре.</p>
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="#calc">Рассчитать стоимость</a>
+      <a class="btn btn-ghost" href="https://wa.me/77750075959" target="_blank" rel="noopener" data-goal="whatsapp">Написать в&nbsp;WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="room">
+    <div class="room-view" id="room-view">
+      <img class="room-poster" id="room-poster" src="img/room-poster.webp" width="1000" height="750" alt="Комната после ремонта: синяя стена, паркет, диван, стеллаж и торшер">
+    </div>
+    <div class="stage" id="stage" hidden>
+      <div class="stage-head">
+        <span class="stage-name" id="stage-name" aria-live="polite">Готовая комната</span>
+        <span class="stage-week" id="stage-week">неделя 8</span>
+      </div>
+      <input id="stage-range" type="range" min="0" max="100" step="1" value="100" aria-label="Этап ремонта: от бетона до готовой комнаты">
+      <div class="stage-ends" aria-hidden="true"><span>Бетон</span><span>Готово</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="calc" id="calc">
+  <div class="calc-intro">
+    <h2>Сколько стоит ваш ремонт</h2>
+    <p>Работы без материалов. Точную смету составляем после бесплатного замера и&nbsp;фиксируем в&nbsp;договоре.</p>
+  </div>
+
+  <form class="calc-form" onsubmit="return false">
+    <div class="field">
+      <label for="area">Площадь квартиры</label>
+      <output id="area-out" for="area">60&nbsp;м²</output>
+      <input id="area" type="range" min="25" max="150" step="5" value="60">
+      <div class="range-ends" aria-hidden="true"><span>25&nbsp;м²</span><span>150&nbsp;м²</span></div>
+    </div>
+
+    <fieldset class="field">
+      <legend>Какой ремонт нужен</legend>
+      <div class="types">
+        <label><input type="radio" name="type" value="cosmetic"><span class="type-name">Косметический</span><span class="type-note">Обои, покраска, полы. Без переноса стен и&nbsp;проводки.</span><span class="type-price">от 18 000 ₸ за м²</span></label>
+        <label><input type="radio" name="type" value="capital" checked><span class="type-name">Капитальный</span><span class="type-note">Всё с&nbsp;нуля: электрика, сантехника, стяжка, отделка.</span><span class="type-price">от 45 000 ₸ за м²</span></label>
+        <label><input type="radio" name="type" value="design"><span class="type-name">По&nbsp;дизайн-проекту</span><span class="type-note">Капитальный ремонт по&nbsp;вашему проекту с&nbsp;авторским надзором.</span><span class="type-price">от 75 000 ₸ за м²</span></label>
+      </div>
+    </fieldset>
+
+    <div class="result">
+      <dl>
+        <div><dt>Работы</dt><dd id="sum" aria-live="polite">от 2 700 000 ₸</dd></div>
+        <div><dt>Срок</dt><dd id="term">около 9 недель</dd></div>
+      </dl>
+      <a class="btn btn-solid" id="wa-calc" href="https://wa.me/77750075959" target="_blank" rel="noopener" data-goal="whatsapp">Отправить расчёт в&nbsp;WhatsApp</a>
+    </div>
+  </form>
+</section>
+
+<section class="steps" id="steps">
+  <h2>Как идёт ремонт</h2>
+  <ol class="steps-list">
+    <li><span class="when">День&nbsp;1</span><h3>Замер и&nbsp;смета</h3><p>Инженер обмеряет квартиру и&nbsp;за&nbsp;два дня присылает смету по&nbsp;позициям.</p></li>
+    <li><span class="when">День&nbsp;3</span><h3>Договор</h3><p>Фиксируем цену, график оплат по&nbsp;этапам и&nbsp;дату сдачи.</p></li>
+    <li><span class="when">Недели&nbsp;1–3</span><h3>Черновые работы</h3><p>Демонтаж, электрика, сантехника, стяжка и&nbsp;штукатурка.</p></li>
+    <li><span class="when">Недели&nbsp;4–7</span><h3>Чистовая отделка</h3><p>Покраска, плитка, полы, двери. Фотоотчёт каждую пятницу.</p></li>
+    <li><span class="when">Неделя&nbsp;8</span><h3>Сдача</h3><p>Уборка, проверка по&nbsp;чек-листу и&nbsp;акт. Ключи возвращаем вам.</p></li>
+  </ol>
+</section>
+
+<section class="included" id="included">
+  <h2>Что входит в&nbsp;цену, а&nbsp;что&nbsp;нет</h2>
+  <div class="incl-grid">
+    <div>
+      <h3>Входит</h3>
+      <ul class="yes">
+        <li>Все работы по&nbsp;смете и&nbsp;прораб на&nbsp;объекте</li>
+        <li>Закупка и&nbsp;доставка черновых материалов</li>
+        <li>Вывоз мусора и&nbsp;уборка после ремонта</li>
+        <li>Фотоотчёт раз в&nbsp;неделю</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Оплачивается отдельно</h3>
+      <ul class="no">
+        <li>Чистовые материалы: плитка, краска, полы, двери</li>
+        <li>Мебель, техника и&nbsp;свет</li>
+        <li>Дизайн-проект, если его ещё нет</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <h2>Что спрашивают до&nbsp;договора</h2>
+  <div class="faq-list">
+    <details><summary>Цена точно не&nbsp;вырастет?</summary><p>Смета в&nbsp;договоре окончательная. Меняется она только если вы&nbsp;сами добавляете работы, и&nbsp;только по&nbsp;допсоглашению.</p></details>
+    <details><summary>А&nbsp;если не&nbsp;успеете?</summary><p>Размер неустойки за&nbsp;каждый день просрочки прописан в&nbsp;договоре.</p></details>
+    <details><summary>Как платить?</summary><p>По&nbsp;этапам: аванс на&nbsp;материалы, затем после черновых и&nbsp;после чистовых работ.</p></details>
+    <details><summary>Можно&nbsp;ли приезжать на&nbsp;объект?</summary><p>В&nbsp;любой рабочий день. Предупредите прораба, он&nbsp;всё покажет.</p></details>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-info">
+    <h2>Замер бесплатный, даже если вы&nbsp;ещё выбираете</h2>
+    <dl>
+      <div><dt>Офис</dt><dd>Алматы</dd></div>
+      <div><dt>Часы</dt><dd>Пн–Сб, 9:00–19:00</dd></div>
+      <div><dt>Телефон</dt><dd><a href="tel:+77750075959" data-goal="phone">+7 (775) 007-59-59</a></dd></div>
+    </dl>
+    <div class="links"><a class="btn btn-ghost" href="https://2gis.kz/almaty/firm/70000001060890831" target="_blank" rel="noopener">Открыть в 2ГИС</a></div>
+  </div>
+
+  <form class="lead-form" id="lead-form" novalidate>
+    <h3>Записаться на&nbsp;замер</h3>
+    <p>Перезвоним в&nbsp;течение рабочего дня.</p>
+    <label for="f-name">Как к&nbsp;вам обращаться</label>
+    <input id="f-name" name="name" type="text" autocomplete="given-name" required>
+    <label for="f-tel">Телефон</label>
+    <input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required>
+    <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <label class="consent"><input type="checkbox" name="agree" required><span>Согласен на&nbsp;обработку персональных данных по&nbsp;<a href="#policy">политике</a></span></label>
+    <p class="form-error" id="form-error" role="alert" hidden></p>
+    <button class="btn btn-solid" type="submit">Записаться на&nbsp;замер</button>
+    <p class="form-done" id="form-done" role="status" hidden>Вы записаны на&nbsp;замер. Перезвоним в&nbsp;течение рабочего дня.</p>
+  </form>
+</section>
+
+</main>
+
+<footer class="foot" id="policy">
+  <p>«Smart Remont» — реквизиты компании</p>
+  <p><a href="#policy">Политика обработки персональных данных</a></p>
+</footer>
+
+<nav class="dock" aria-label="Быстрая связь">
+  <a href="tel:+77750075959" data-goal="phone">Позвонить</a>
+  <a href="https://wa.me/77750075959" target="_blank" rel="noopener" data-goal="whatsapp" id="wa-dock">WhatsApp</a>
+  <a href="#contact">Замер</a>
+</nav>
+
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+<script>window.SITE={"wa": "77750075959", "currency": "₸", "prices": {"cosmetic": 18000, "capital": 45000, "design": 75000}, "accent": "#1E7A4C", "form": "whatsapp", "endpoint": "", "phone": "+7 (775) 007-59-59", "name": "Smart Remont"}</script>
+<script src="app.js?v=3" defer></script>
+<script type="module" src="room3d.js?v=2"></script>
+</body>
+</html>
