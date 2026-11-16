@@ -20,7 +20,7 @@ const smooth = (x) => { x = clamp01(x); return x * x * (3 - 2 * x); };
 const backOut = (x) => { x = clamp01(x); const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
 
 async function start() {
-  const gltf = await new GLTFLoader().loadAsync('models/room.glb');
+  const gltf = await new GLTFLoader().loadAsync(new URL('models/room.glb', import.meta.url).href);
   const root = gltf.scene;
   const node = (n) => root.getObjectByName(n);
 
@@ -62,7 +62,7 @@ async function start() {
   renderer.toneMapping = THREE.NeutralToneMapping;
   renderer.toneMappingExposure = 1.0;
   renderer.domElement.setAttribute('role', 'img');
-  renderer.domElement.setAttribute('aria-label', 'Трёхмерная комната. Потяните, чтобы повернуть; ползунок ниже меняет этап ремонта.');
+  renderer.domElement.setAttribute('aria-label', document.documentElement.lang === 'kk' ? 'Үш өлшемді бөлме. Бұру үшін тартыңыз; төмендегі жүгірткі жөндеу кезеңін өзгертеді.' : 'Трёхмерная комната. Потяните, чтобы повернуть; ползунок ниже меняет этап ремонта.');
 
   const scene = new THREE.Scene();
   scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;

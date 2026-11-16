@@ -7,11 +7,12 @@
   var WA_NUMBER = SITE.wa || '77000000000';
   var CUR = SITE.currency || '₸';
   var PRICES = SITE.prices || {};
+  var KK = document.documentElement.lang === 'kk'; // казахская версия страницы
 
   var TYPES = {
-    cosmetic: { name: 'косметический', price: PRICES.cosmetic || 18000, daysPerM2: 0.45, minDays: 14 },
-    capital: { name: 'капитальный', price: PRICES.capital || 45000, daysPerM2: 1.0, minDays: 35 },
-    design: { name: 'по дизайн-проекту', price: PRICES.design || 75000, daysPerM2: 1.35, minDays: 49 }
+    cosmetic: { name: KK ? 'косметикалық' : 'косметический', price: PRICES.cosmetic || 18000, daysPerM2: 0.45, minDays: 14 },
+    capital: { name: KK ? 'күрделі' : 'капитальный', price: PRICES.capital || 45000, daysPerM2: 1.0, minDays: 35 },
+    design: { name: KK ? 'дизайн-жоба бойынша' : 'по дизайн-проекту', price: PRICES.design || 75000, daysPerM2: 1.35, minDays: 49 }
   };
 
   function money(n, sep) {
@@ -40,11 +41,11 @@
     var weeks = Math.ceil(Math.max(t.minDays, m2 * t.daysPerM2) / 7);
 
     areaOut.textContent = m2 + NBSP + 'м²';
-    sum.textContent = 'от' + NBSP + money(total) + NBSP + CUR;
-    term.textContent = 'около ' + weeks + NBSP + weeksWord(weeks);
-    area.setAttribute('aria-valuetext', m2 + ' квадратных метров');
+    sum.textContent = KK ? money(total) + NBSP + CUR + NBSP + 'бастап' : 'от' + NBSP + money(total) + NBSP + CUR;
+    term.textContent = KK ? 'шамамен ' + weeks + NBSP + 'апта' : 'около ' + weeks + NBSP + weeksWord(weeks);
+    area.setAttribute('aria-valuetext', m2 + (KK ? ' шаршы метр' : ' квадратных метров'));
 
-    var msg = 'Здравствуйте! Нужен ремонт: ' + m2 + ' м², ' + t.name +
+    var msg = KK ? 'Сәлеметсіз бе! Жөндеу керек: ' + m2 + ' м², ' + t.name + '. Сайттағы есеп: ' + money(total, ' ') + ' ' + CUR + ' бастап, шамамен ' + weeks + ' апта. Өлшеуге қашан келе аласыздар?' : 'Здравствуйте! Нужен ремонт: ' + m2 + ' м², ' + t.name +
       '. Расчёт на сайте: от ' + money(total, ' ') + ' ' + CUR + ', около ' + weeks + ' ' + weeksWord(weeks) +
       '. Когда можно замер?';
     var href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
@@ -62,7 +63,13 @@
   var range = document.getElementById('stage-range');
   var stageName = document.getElementById('stage-name');
   var stageWeek = document.getElementById('stage-week');
-  var STAGES = [
+  var STAGES = KK ? [
+    [0.12, 'Бетон қорап', '1-күн'],
+    [0.46, 'Сылақ және сырлау', '1–3-апта'],
+    [0.63, 'Еден және плинтус', '4–5-апта'],
+    [0.97, 'Жиһаз және жарық', '6–7-апта'],
+    [2, 'Дайын бөлме', '8-апта']
+  ] : [
     [0.12, 'Бетонная коробка', 'день 1'],
     [0.46, 'Штукатурка и покраска', 'недели 1–3'],
     [0.63, 'Полы и плинтус', 'недели 4–5'],
@@ -139,9 +146,9 @@
       err.hidden = true;
       if (form.company.value || Date.now() - started < 2500) return; // ловушка для ботов
       var problem = '';
-      if (!form.name.value.trim()) problem = 'Напишите, как к вам обращаться.';
-      else if (formatTel(form.tel.value).digits < 10) problem = 'В номере не хватает цифр. Нужно 10 после +7.';
-      else if (!form.agree.checked) problem = 'Отметьте согласие на обработку данных, без него не можем принять заявку.';
+      if (!form.name.value.trim()) problem = KK ? 'Атыңызды жазыңыз.' : 'Напишите, как к вам обращаться.';
+      else if (formatTel(form.tel.value).digits < 10) problem = KK ? 'Нөмірде цифр жетпейді. +7-ден кейін 10 цифр керек.' : 'В номере не хватает цифр. Нужно 10 после +7.';
+      else if (!form.agree.checked) problem = KK ? 'Деректерді өңдеуге келісім беріңіз, онсыз өтінімді қабылдай алмаймыз.' : 'Отметьте согласие на обработку данных, без него не можем принять заявку.';
       if (problem) { err.textContent = problem; err.hidden = false; return; }
       var btn = form.querySelector('button[type=submit]');
       var name = form.name.value.trim(), phone = form.tel.value;
@@ -152,8 +159,8 @@
       }
       if (SITE.form === 'whatsapp') {
         // заявка уходит владельцу сообщением в WhatsApp, сервер не нужен
-        var text = 'Заявка на замер с сайта. Имя: ' + name + '. Телефон: ' + phone + '.';
-        finish('Открываем WhatsApp. Нажмите «Отправить», и мы перезвоним в течение рабочего дня.');
+        var text = KK ? 'Сайттан өлшеуге өтінім. Аты: ' + name + '. Телефон: ' + phone + '.' : 'Заявка на замер с сайта. Имя: ' + name + '. Телефон: ' + phone + '.';
+        finish(KK ? 'WhatsApp ашылады. «Жіберу» батырмасын басыңыз, жұмыс күні ішінде қайта қоңырау шаламыз.' : 'Открываем WhatsApp. Нажмите «Отправить», и мы перезвоним в течение рабочего дня.');
         window.location.href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text);
       } else if (SITE.form === 'endpoint' && SITE.endpoint) {
         // заявка уходит на сервер-пересыльщик (leads-tools/telegram-worker.js), тот пишет в Telegram владельца
@@ -167,7 +174,7 @@
           finish();
         }).catch(function () {
           btn.disabled = false;
-          err.textContent = 'Заявка не отправилась. Попробуйте ещё раз или позвоните: ' + (SITE.phone || '') + '.';
+          err.textContent = (KK ? 'Өтінім жіберілмеді. Қайталап көріңіз немесе қоңырау шалыңыз: ' : 'Заявка не отправилась. Попробуйте ещё раз или позвоните: ') + (SITE.phone || '') + '.';
           err.hidden = false;
         });
       } else {
