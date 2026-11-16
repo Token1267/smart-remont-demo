@@ -73,6 +73,9 @@ h3 { font-size: var(--s-1); font-weight: 600; line-height: 1.25; }
 .nav { display: none; gap: 26px; margin-left: auto; }
 .nav a { text-decoration: none; padding: 6px 0; }
 .nav a:hover { text-decoration: underline; text-underline-offset: 5px; }
+/* В Unbounded нет казахских букв (ә, ғ, қ, ң, ө, ұ, ү, һ), поэтому казахская версия целиком набрана Onest */
+html[lang=kk] { --display: 'Onest', system-ui, sans-serif; }
+html[lang=kk] h1, html[lang=kk] h2 { font-weight: 700; letter-spacing: -0.035em; }
 .lang { margin-left: auto; font-weight: 600; text-decoration: none; padding: 6px 12px; border: 1.5px solid currentColor; border-radius: 999px; font-size: var(--s--1); white-space: nowrap; }
 .lang + .top-phone { margin-left: 0; }
 @media (max-width: 480px) { .top { gap: 12px; } .lang + .top-phone { display: none; } }
